@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Camp Schedule App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Outfit", sans-serif;
+        background: url("background.png") center center / cover no-repeat fixed;
+        min-height: 100vh; /* Full screen height */
+        backdrop-filter: blur(10px); /* Blur effect */
+        -webkit-backdrop-filter: blur(10px); /* For Safari */
+        color: rgb(0, 0, 0);
+        margin: 0;
+        font-size: large;
+      }
+
+      .tab-active {
+        background-color: #166534;
+        color: rgb(78, 78, 78);
+        font-weight: bold;
+      }
+
+      .footer-btn-active {
+        color: #86efac;
+      }
+
+      @keyframes scroll-left {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-50%);
+        }
+      }
+
+      .animate-scroll {
+        animation: scroll-left 20s linear infinite;
+      }
+
+    </style>
+  </head>
+
+  <body class="min-h-screen flex flex-col items-center px-4 py-2 space-y-2">
+
+    <div id="homePage" class="w-full max-w-2xl space-y-2">
+      <div class="flex items-center justify-center space-x-2">
+        <h1 class="text-2xl font-bold text-center text-white shadow-md">
+          SYC 2025 | ISED
+        </h1>
+        <img src="logo.png" alt="SYC Logo" class="h-20 w-20" />
+      </div>
+
+      <div class="relative w-full max-w-2xl mx-auto overflow-hidden rounded-xl bg-green-700/70 p-2">
+
+      <div id="carouselTrack" class="flex transition-transform duration-500 ease-in-out">
+        <img src="SYC.png" class="w-full flex-shrink-0 object-cover" alt="Image 1">
+        <img src="shirt.png" class="w-full flex-shrink-0 object-cover" alt="Image 1">
+        <img src="meme1.png" class="w-full flex-shrink-0 object-cover" alt="Image 1">
+        <img src="meme2.png" class="w-full flex-shrink-0 object-cover" alt="Image 1">
+        <img src="sikhay.jpg" class="w-full flex-shrink-0 object-cover" alt="Image 2">
+        <img src="area1.png" class="w-full flex-shrink-0 object-cover" alt="Image 3">
+        <img src="area2.png" class="w-full flex-shrink-0 object-cover" alt="Image 4">
+        <img src="area3.png" class="w-full flex-shrink-0 object-cover" alt="Image 5">
+      </div>
+
+        <button id="prevBtn" class="absolute top-1/2 -translate-y-1/2 left-2 bg-white/70 rounded-full p-2 hover:bg-white">
+         ◀
+        </button>
+        <button id="nextBtn" class="absolute top-1/2 -translate-y-1/2 right-2 bg-white/70 rounded-full p-2 hover:bg-white">
+         ▶
+        </button>
+        <div id="dots" class="absolute bottom-2 left-1/2 -translate-x-1/2 flex space-x-2">
+        </div>
+
+
+        <div class="overflow-hidden relative w-full max-w-2xl mx-auto">
+          <div class="flex space-x-4 animate-scroll whitespace-nowrap">
+
+            <div
+              class="bg-green-700/70 p-4 rounded-xl inline-block min-w-[350px]"
+               >
+              <h2 class="font-bold">Day 1: Caring from God</h2>
+              <p>Worship, Lessons 1-2, Bonfire Night</p>
+            </div>
+
+            <div
+              class="bg-green-700/70 p-4 rounded-xl inline-block min-w-[450px]"
+              >
+              <h2 class="font-bold">Day 2: Caring for Oneself</h2>
+              <p>Zumba, Lessons 3, Laro ng Lahi, Evangelistic Night</p>
+            </div>
+
+            <div
+              class="bg-green-700/70 p-4 rounded-xl inline-block min-w-[350px]"
+              >
+              <h2 class="font-bold">Day 3: Caring for Creation</h2>
+              <p>Fun Run, Tree Planting, Awarding & Photo Ops</p>
+            </div>
+
+          </div>
+        </div>
+         </div>
+        </div>
+ 
+
+
+    <!-- SCHEDULE PAGE -->
+    <div id="schedulePage" class="hidden w-full max-w-2xl">
+      <div class="flex justify-center space-x-2 mb-4">
+        <button id="tab1" class="tab px-4 py-1 rounded-lg bg-green-700/70">
+          Day 1
+        </button>
+        <button id="tab2" class="tab px-4 py-1 rounded-lg bg-green-700/70">
+          Day 2
+        </button>
+        <button id="tab3" class="tab px-4 py-1 rounded-lg bg-green-700/70">
+          Day 3
+        </button>
+      </div>
+      <div
+        id="content"
+        class="bg-white/10 p-5 rounded-3xl shadow space-y-2 text-sm"
+      ></div>
+    </div>
+
+
+
+  <!-- EVALUATION PAGE -->
+<div id="evaluationPage" class="hidden min-h-2xl max-w-2xl mx-auto space-y-6 p-4">
+  <h2 class="text-xl font-bold text-center mb-4">Event Evaluation Form</h2>
+
+  <form id="evaluationForm" class="space-y-4">
+    <div>
+      <label class="font-medium">Place</label>
+      <select name="place" required class="w-full p-2 rounded">
+        <option value="">Select</option>
+        <option value="Excellent">Excellent</option>
+        <option value="Good">Good</option>
+        <option value="Fair">Fair</option>
+        <option value="Poor">Poor</option>
+      </select>
+    </div>
+
+    <div>
+      <label class="font-medium">Program</label>
+      <select name="program" required class="w-full p-2 rounded">
+        <option value="">Select</option>
+        <option value="Excellent">Excellent</option>
+        <option value="Good">Good</option>
+        <option value="Fair">Fair</option>
+        <option value="Poor">Poor</option>
+      </select>
+    </div>
+
+    <div>
+      <label class="font-medium">Officers and Staffs</label>
+      <select name="staffs" required class="w-full p-2 rounded">
+        <option value="">Select</option>
+        <option value="Excellent">Excellent</option>
+        <option value="Good">Good</option>
+        <option value="Fair">Fair</option>
+        <option value="Poor">Poor</option>
+      </select>
+    </div>
+
+    <div>
+      <label class="font-medium">Overall</label>
+      <select name="overall" required class="w-full p-2 rounded">
+        <option value="">Select</option>
+        <option value="Excellent">Excellent</option>
+        <option value="Good">Good</option>
+        <option value="Fair">Fair</option>
+        <option value="Poor">Poor</option>
+      </select>
+    </div>
+
+    <div>
+      <label class="font-medium">Comments / Recommendation / Feedback</label>
+      <textarea name="feedback" rows="4" class="w-full p-2 rounded" placeholder="Write here..." required></textarea>
+    </div>
+
+    <button type="submit" class="bg-blue-600 text-white px-2 py-2 rounded hover:bg-blue-700">
+      Submit Evaluation
+    </button>
+
+    <br></br>
+    <br></br>
+    <br></br>
+  </form>
+
+  <div id="evalMessage" class="text-green-500 mt-4 hidden">Thank you for your feedback!</div>
+</div>
+    
+
+<!-- IMAGES PAGE -->
+<div id="imagesPage" class="hidden w-full max-w-2xl bg-white/10 p-6 rounded-3xl text-sm">
+  <h2 class="text-xl font-bold mb-2">Camp Memories</h2>
+  <p class="mb-4">Check out some photos from the camp or upload yours!</p>
+
+  <!-- Upload Form -->
+  <form id="uploadForm" class="mb-4 flex items-center gap-2">
+    <input type="file" id="imageInput" accept="image/*" class="text-xs bg-white rounded px-2 py-1" required>
+    <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded">Upload</button>
+  </form>
+
+  <!-- Image Gallery Grid -->
+  <div id="gallery" class="grid grid-cols-2 gap-3">
+    <!-- Images loaded from API will appear here -->
+  </div>
+</div>
+
+<!-- Lightbox Viewer -->
+<div id="lightbox" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-50">
+  <img id="lightboxImage" src="" class="max-h-[90vh] max-w-[90vw] rounded shadow-lg" />
+</div>
+
+
+    <footer
+      class="fixed bottom-0 left-0 right-0 bg-white/10 backdrop-blur p-2 flex justify-around text-xs text-white z-50"
+    >
+      <button
+        onclick="showPage('homePage', this)"
+        class="footer-btn flex flex-col items-center"
+      >
+        <div class="text-xl">🏕️</div>
+        Home
+      </button>
+      <button
+        onclick="showPage('schedulePage', this)"
+        class="footer-btn flex flex-col items-center"
+      >
+        <div class="text-xl">📅</div>
+        Sched
+      </button>
+      <button
+        onclick="showPage('evaluationPage', this)"
+        class="footer-btn flex flex-col items-center"
+      >
+        <div class="text-xl">📝</div>
+        Evaluate
+      </button>
+      <button
+        onclick="showPage('imagesPage', this)"
+        class="footer-btn flex flex-col items-center"
+      >
+        <div class="text-xl">📷</div>
+        Images
+      </button>
+    </footer>
+
+    <script>
+      // Show one page and highlight footer button
+      function showPage(pageId, btn) {
+        const pages = [
+          "homePage",
+          "schedulePage",
+          "evaluationPage",
+          "imagesPage",
+        ];
+        pages.forEach((pid) => {
+          document.getElementById(pid).classList.add("hidden");
+        });
+        document.getElementById(pageId).classList.remove("hidden");
+
+        // Highlight the clicked footer button
+        document
+          .querySelectorAll("footer button.footer-btn")
+          .forEach((b) => b.classList.remove("footer-btn-active"));
+        btn.classList.add("footer-btn-active");
+      }
+
+      // Initialize tabs on schedule page
+    const tabs = document.querySelectorAll("#schedulePage .tab");
+const content = document.getElementById("content");
+
+const scheduleData = {
+  tab1: `
+    <div >
+      <h2 class="text-lg font-bold mb-2" >Day 1 Schedule <br> Caring from God </br></h2>
+       <ul class="list-disc list-inside text-black-300 text-base space-y-1 ">
+        <li>Worship</li>
+        <li>Lessons 1-2</li>
+        <li>Bonfire Night</li>
+      </ul>
+    </div>
+    <div class="mt-4">
+      <img src="day1.png" class="w-full rounded-lg object-cover shadow-md" alt="Day 1 Image">
+    </div>
+  `,
+  tab2: `
+    <div>
+      <h2 class="text-lg font-bold mb-2">Day 2 Schedule <br> Caring for Oneself </br> </h2>
+      <ul class="list-disc list-inside">
+        <li>Zumba</li>
+        <li>Lesson 3</li>
+        <li>Laro ng Lahi</li>
+        <li>Evangelistic Night</li>
+      </ul>
+    </div>
+     <div class="mt-4">
+      <img src="day2.png" class="w-full rounded-lg object-cover shadow-md" alt="Day 1 Image">
+    </div>
+  `,
+ tab3: `
+    <div>
+      <h2 class="text-lg font-bold mb-2">Day 3 Schedule <br> Caring for Creation </br></h2>
+      <ul class="list-disc list-inside">
+        <li>Fun Run</li>
+        <li>Tree Planting</li>
+        <li>Awarding & Photo Ops</li>
+      </ul>
+    </div>
+    <div class="mt-4">
+      <img src="day3.png" class="w-full rounded-lg object-cover shadow-md" alt="Day 3 Image">
+    </div>
+  `,
+};
+
+tabs.forEach((tab) => {
+  tab.addEventListener("click", () => {
+    tabs.forEach((t) => t.classList.remove("tab-active"));
+    tab.classList.add("tab-active");
+
+    const tabId = tab.id;
+    content.innerHTML = scheduleData[tabId];
+  });
+});
+
+// Set default schedule tab
+tabs[0].click();
+
+// Show home page and activate its footer button on load
+window.onload = () => {
+  showPage("homePage", document.querySelector("footer button.footer-btn"));
+};
+
+ const track = document.getElementById("carouselTrack");
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
+let currentSlide = 0;
+
+function updateCarousel() {
+  const slideWidth = track.clientWidth;
+  track.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
+}
+
+nextBtn.addEventListener("click", () => {
+  const slides = track.children.length;
+  currentSlide = (currentSlide + 1) % slides;
+  updateCarousel();
+});
+
+prevBtn.addEventListener("click", () => {
+  const slides = track.children.length;
+  currentSlide = (currentSlide - 1 + slides) % slides;
+  updateCarousel();
+});
+
+  // Create dots
+  for (let i = 0; i < slides; i++) {
+    const dot = document.createElement('button');
+    dot.className = 'w-3 h-3 rounded-full bg-white/50 hover:bg-white';
+    dot.addEventListener('click', () => {
+      current = i;
+      moveToSlide(current);
+      resetAutoSlide();
+    });
+    dotsContainer.appendChild(dot);
+  }
+
+  const dots = dotsContainer.children;
+
+  function updateDots() {
+    [...dots].forEach((dot, i) => {
+      dot.classList.toggle('bg-white', i === current);
+      dot.classList.toggle('bg-white/50', i !== current);
+    });
+  }
+
+  function moveToSlide(index) {
+    const width = track.clientWidth;
+    track.style.transform = `translateX(-${index * width}px)`;
+    updateDots();
+  }
+
+  function nextSlide() {
+    current = (current + 1) % slides;
+    moveToSlide(current);
+  }
+
+  function prevSlide() {
+    current = (current - 1 + slides) % slides;
+    moveToSlide(current);
+  }
+
+  document.getElementById('nextBtn').addEventListener('click', () => {
+    nextSlide();
+    resetAutoSlide();
+  });
+
+  document.getElementById('prevBtn').addEventListener('click', () => {
+    prevSlide();
+    resetAutoSlide();
+  });
+
+  function startAutoSlide() {
+    autoSlideInterval = setInterval(nextSlide, 3000);
+  }
+
+  function resetAutoSlide() {
+    clearInterval(autoSlideInterval);
+    startAutoSlide();
+  }
+
+  // Init
+  moveToSlide(0);
+  startAutoSlide();
+
+  // Optional: handle resize
+  window.addEventListener('resize', () => moveToSlide(current));
+    </script>
+
+
+<script>
+ document.getElementById("evaluationForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const formData = new URLSearchParams(new FormData(this));
+
+  fetch("https://script.google.com/macros/s/AKfycbzEUPloM3b_P2UknOszihdTSlL5aIr-mn3ERT3cn0AC19AAE3gcQ9_KW9mx-2XvFChA/exec", {
+    method: "POST",
+    mode: "no-cors",  // Important! Avoids CORS block but no response readable
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: formData
+  })
+  .then(() => {
+    alert("Thank you for your feedback!");
+    this.reset();
+  })
+  .catch(() => {
+    alert("Submission failed. Please try again.");
+  });
+});
+</script>
+
+
+<script>
+const apiEndpoint = 'http://192.168.0.100/ised/imageapi.php'; // Update as needed
+const gallery = document.getElementById('gallery');
+const uploadForm = document.getElementById('uploadForm');
+const imageInput = document.getElementById('imageInput');
+
+const lightbox = document.getElementById('lightbox');
+const lightboxImage = document.getElementById('lightboxImage');
+
+// Open image in lightbox on click
+gallery.addEventListener('click', (e) => {
+  if (e.target.tagName === 'IMG') {
+    lightboxImage.src = e.target.src;
+    lightbox.classList.remove('hidden');
+  }
+});
+
+// Close lightbox on click
+lightbox.addEventListener('click', () => {
+  lightbox.classList.add('hidden');
+  lightboxImage.src = '';
+});
+
+// Load and display images from backend
+async function loadImages() {
+  try {
+    const res = await fetch(apiEndpoint);
+    const images = await res.json();
+
+    gallery.innerHTML = '';
+    images.forEach(img => {
+      const imageEl = document.createElement('img');
+      imageEl.src = img.url;
+      imageEl.alt = img.name || 'Uploaded image';
+      imageEl.className = 'w-full h-40 object-cover rounded cursor-pointer';
+      gallery.appendChild(imageEl);
+    });
+  } catch (error) {
+    console.error('Error loading images:', error);
+    gallery.innerHTML = '<p class="text-red-500">Failed to load images.</p>';
+  }
+}
+
+// Upload image with size validation (25MB max)
+uploadForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const file = imageInput.files[0];
+  if (!file) return;
+
+  const maxSizeMB = 25;
+  if (file.size > maxSizeMB * 1024 * 1024) {
+    alert(`File too large! Max allowed size is ${maxSizeMB}MB.`);
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append('image', file);
+
+  try {
+    const res = await fetch(apiEndpoint, {
+      method: 'POST',
+      body: formData,
+    });
+
+    if (!res.ok) {
+      const errorData = await res.json();
+      throw new Error(errorData.error || 'Upload failed');
+    }
+
+    // Reload gallery after successful upload
+    await loadImages();
+    imageInput.value = ''; // Clear input
+  } catch (error) {
+    alert('Upload failed: ' + error.message);
+    console.error(error);
+  }
+});
+
+// Initial load
+loadImages();
+</script>
+
+
+  </body>
+</html>
